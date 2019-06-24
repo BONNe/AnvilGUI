@@ -26,10 +26,7 @@ public class VersionMatcher {
     private Class<? extends VersionWrapper> match() {
         return versions.stream()
                 .filter(version -> version.getSimpleName().substring(subString).equals(serverVersion))
-                .findFirst()
-                .orElseThrow(() -> {
-                    throw new IllegalAccessError("Unsupported version for AnvilGUI");
-                });
+                .findFirst().get();
     }
 
     private VersionWrapper newInstance(Class<? extends VersionWrapper> clazz, Object... args) {
