@@ -53,19 +53,14 @@ public class Wrapper1_14_R1 implements VersionWrapper {
     }
 
     private void setWindowId() {
-        Field field = null;
-
         try {
-            field = Container.class.getField("windowId");
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+            Field field = Container.class.getField("windowId");
+            field.setAccessible(true);
 
-        FieldUtils.removeFinalModifier(field);
+            FieldUtils.removeFinalModifier(field);
 
-        try {
-            FieldUtils.writeField(field, container, containerId);
-        } catch (IllegalAccessException e) {
+            field.setInt(container, containerId);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
@@ -85,5 +80,4 @@ public class Wrapper1_14_R1 implements VersionWrapper {
         }
 
     }
-
 }
