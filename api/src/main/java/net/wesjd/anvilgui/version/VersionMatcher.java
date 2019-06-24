@@ -46,7 +46,7 @@ public class VersionMatcher {
         try {
             Constructor<?> constructor = clazz.getDeclaredConstructor(argTypes);
             return (VersionWrapper) constructor.newInstance(args);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessError | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
